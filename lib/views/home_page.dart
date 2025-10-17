@@ -26,19 +26,19 @@ class HomePage extends StatelessWidget {
           children: [
             RichText(
               text: TextSpan(
-                style: GoogleFonts.mogra(fontSize: 60),
+                style: GoogleFonts.mogra(fontSize: 30),
                 children: [
                   TextSpan(
-                    text: 'TIC-',
-                    style: TextStyle(color: Colors.orange),
+                    text: 'TIC',
+                    style: TextStyle(fontFamily: 'BungeeSpice'),
                   ),
                   TextSpan(
-                    text: 'TAC-',
-                    style: TextStyle(color: Colors.purple),
+                    text: '-TAC-',
+                    style: TextStyle(fontFamily: 'BungeeSpice'),
                   ),
                   TextSpan(
                     text: 'TOE',
-                    style: TextStyle(color: Colors.yellow),
+                    style: TextStyle(fontFamily: 'BungeeSpice'),
                   ),
                 ],
               ),
@@ -48,20 +48,16 @@ class HomePage extends StatelessWidget {
                 style: GoogleFonts.mogra(fontSize: 60),
                 children: [
                   TextSpan(
-                    text: 'X-',
-                    style: TextStyle(color: Colors.yellow),
+                    text: 'O',
+                    style: TextStyle(fontFamily: 'BungeeSpice'),
                   ),
                   TextSpan(
-                    text: 'O-',
-                    style: TextStyle(color: Colors.purple),
-                  ),
-                  TextSpan(
-                    text: 'X-',
-                    style: TextStyle(color: Colors.yellow),
+                    text: '-X-',
+                    style: TextStyle(fontFamily: 'BungeeSpice'),
                   ),
                   TextSpan(
                     text: 'O',
-                    style: TextStyle(color: Colors.purple),
+                    style: TextStyle(fontFamily: 'BungeeSpice'),
                   ),
                 ],
               ),

@@ -17,8 +17,6 @@ class _GameScreenRobotState extends State<GameScreenRobot> {
   int _counter = 10;
   Timer? _timer;
 
-
-
   void startTimer() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (_counter > 0) {
@@ -70,8 +68,6 @@ class _GameScreenRobotState extends State<GameScreenRobot> {
 
     checkWinner();
   }
-
-
 
   @override
   void initState() {
@@ -132,9 +128,9 @@ class _GameScreenRobotState extends State<GameScreenRobot> {
 
   void showDashBoard(String winner) {
     String finalWinner;
-    if(winner == 'X'){
+    if (winner == 'X') {
       finalWinner = 'Robot';
-    }else{
+    } else {
       finalWinner = 'You';
     }
     showDialog(
@@ -159,12 +155,13 @@ class _GameScreenRobotState extends State<GameScreenRobot> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Winner!',style: TextStyle(color: Colors.white),),
+                Text('Winner!', style: TextStyle(fontFamily: 'BungeeSpice')),
                 Text(
                   finalWinner,
-                  style: GoogleFonts.bungeeSpice(
+                  style: TextStyle(
                     fontSize: 50,
                     fontWeight: FontWeight.bold,
+                    fontFamily: 'BungeeSpice',
                   ),
                 ),
               ],
@@ -254,7 +251,7 @@ class _GameScreenRobotState extends State<GameScreenRobot> {
                     playerName: 'X',
                     borderColor: moveOfX ? Colors.red : Colors.transparent,
                   ),
-                  CustomTimerContainer(timerVal: moveOfX ? _counter : 10,),
+                  CustomTimerContainer(timerVal: moveOfX ? _counter : 10),
                 ],
               ),
               // =======================Grid View ======================
@@ -288,7 +285,7 @@ class _GameScreenRobotState extends State<GameScreenRobot> {
                         child: Center(
                           child: Text(
                             displayValues[index],
-                            style: GoogleFonts.bungeeSpice(fontSize: 90),
+                            style: TextStyle(fontSize: 90,fontFamily: 'BungeeSpice'),
                           ),
                         ),
                       ),
@@ -300,7 +297,7 @@ class _GameScreenRobotState extends State<GameScreenRobot> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CustomTimerContainer(timerVal: moveOfX ? 10 : _counter,),
+                  CustomTimerContainer(timerVal: moveOfX ? 10 : _counter),
                   CustomPlayerContainer(
                     avatarIcon: Icons.person,
                     playerName: '0',
@@ -365,15 +362,15 @@ class CustomPlayerContainer extends StatelessWidget {
               height: 40,
               width: 40,
               decoration: BoxDecoration(
-                color: Colors.black,
+                color: Colors.grey,
                 borderRadius: BorderRadius.circular(100),
               ),
               child: Center(
                 child: Text(
                   playerName,
                   style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
+                    fontSize: 25,
+                    fontFamily: 'BungeeSpice',
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -389,14 +386,13 @@ class CustomPlayerContainer extends StatelessWidget {
 // ======================Custom Timer Container=======================
 class CustomTimerContainer extends StatefulWidget {
   final int timerVal;
-  const CustomTimerContainer({super.key,required this.timerVal});
+  const CustomTimerContainer({super.key, required this.timerVal});
 
   @override
   State<CustomTimerContainer> createState() => _CustomTimerContainerState();
 }
 
 class _CustomTimerContainerState extends State<CustomTimerContainer> {
-
   @override
   Widget build(BuildContext context) {
     return Container(

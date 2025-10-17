@@ -23,7 +23,12 @@ class SplashScreen extends StatelessWidget {
             gradient: LinearGradient(
               begin: AlignmentGeometry.topCenter,
               end: AlignmentGeometry.bottomCenter,
-              colors: [Color(0xff6FA8DC),Color(0xff93C47D), Color(0xffFFE084), Colors.white],
+              colors: [
+                Color(0xff6FA8DC),
+                Color(0xff93C47D),
+                Color(0xffFFE084),
+                Colors.white,
+              ],
             ),
           ),
           child: Stack(
@@ -40,13 +45,20 @@ class SplashScreen extends StatelessWidget {
               ),
               RichText(
                 text: TextSpan(
-                  style: GoogleFonts.mogra(
-                    fontSize: 150,
-                  ),
+                  style: GoogleFonts.mogra(fontSize: 150),
                   children: [
-                    TextSpan(text: 'TIC\n',style: TextStyle(color: Colors.orange)),
-                    TextSpan(text: 'TAC\n',style: TextStyle(color: Colors.green)),
-                    TextSpan(text: 'TOE',style: TextStyle(color: Colors.lightBlue)),
+                    TextSpan(
+                      text: 'TIC\n',
+                      style: TextStyle(fontFamily: 'BungeeSpice'),
+                    ),
+                    TextSpan(
+                      text: 'TAC\n',
+                      style: TextStyle(fontFamily: 'BungeeSpice'),
+                    ),
+                    TextSpan(
+                      text: 'TOE',
+                      style: TextStyle(fontFamily: 'BungeeSpice'),
+                    ),
                   ],
                 ),
               ),
@@ -58,15 +70,11 @@ class SplashScreen extends StatelessWidget {
   }
 }
 
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomePage(),
-    );
+    return MaterialApp(debugShowCheckedModeBanner: false, home: HomePage());
   }
 }

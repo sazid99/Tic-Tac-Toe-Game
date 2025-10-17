@@ -121,12 +121,19 @@ class _GameScreenState extends State<GameScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Winner!', style: TextStyle(color: Colors.white)),
+                Text(
+                  'Winner!',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'BungeeSpice',
+                  ),
+                ),
                 Text(
                   winner,
-                  style: GoogleFonts.bungeeSpice(
+                  style: TextStyle(
                     fontSize: 50,
                     fontWeight: FontWeight.bold,
+                    fontFamily: 'BungeeSpice',
                   ),
                 ),
               ],
@@ -249,7 +256,10 @@ class _GameScreenState extends State<GameScreen> {
                         child: Center(
                           child: Text(
                             displayValues[index],
-                            style: GoogleFonts.bungeeSpice(fontSize: 90),
+                            style: TextStyle(
+                              fontSize: 90,
+                              fontFamily: 'BungeeSpice',
+                            ),
                           ),
                         ),
                       ),
@@ -323,15 +333,15 @@ class CustomPlayerContainer extends StatelessWidget {
               height: 40,
               width: 40,
               decoration: BoxDecoration(
-                color: Colors.black,
+                color: Colors.grey,
                 borderRadius: BorderRadius.circular(100),
               ),
               child: Center(
                 child: Text(
                   playerName,
                   style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
+                    fontSize: 25,
+                    fontFamily: 'BungeeSpice',
                     fontWeight: FontWeight.bold,
                   ),
                 ),
