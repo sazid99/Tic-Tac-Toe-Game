@@ -1,0 +1,421 @@
+import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:tic_tac_toe/views/home_page.dart';
+
+class GameScreenRobot extends StatefulWidget {
+  const GameScreenRobot({super.key});
+
+  @override
+  State<GameScreenRobot> createState() => _GameScreenRobotState();
+}
+
+class _GameScreenRobotState extends State<GameScreenRobot> {
+  List<String> displayValues = ['', '', '', '', '', '', '', '', ''];
+
+  bool moveOfX = false;
+  int _counter = 10;
+  Timer? _timer;
+
+
+
+  void startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (_counter > 0) {
+        setState(() {
+          _counter--;
+        });
+      } else {
+        _timer!.cancel();
+      }
+    });
+  }
+
+  void _gestureTap(int index) {
+    setState(() {
+      if (displayValues[index] == '') {
+        if (!moveOfX) {
+          displayValues[index] = '0';
+          moveOfX = true;
+          _counter = 10;
+          checkWinner();
+
+          // Robot Move Delay (simulate thinking)
+          Future.delayed(const Duration(seconds: 1), () {
+            robotMove();
+          });
+        }
+      }
+    });
+  }
+
+  void robotMove() {
+    if (!displayValues.contains('')) return;
+
+    final emptyIndexes = <int>[];
+    for (int i = 0; i < displayValues.length; i++) {
+      if (displayValues[i] == '') emptyIndexes.add(i);
+    }
+
+    if (emptyIndexes.isEmpty) return;
+
+    emptyIndexes.shuffle();
+    final moveIndex = emptyIndexes.first;
+
+    setState(() {
+      displayValues[moveIndex] = 'X';
+      moveOfX = false;
+      _counter = 10;
+    });
+
+    checkWinner();
+  }
+
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    startTimer();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _timer?.cancel();
+  }
+
+  void checkWinner() {
+    if (displayValues[0] == displayValues[1] &&
+        displayValues[0] == displayValues[2] &&
+        displayValues[0] != '') {
+      showDashBoard(displayValues[0]);
+    }
+    if (displayValues[3] == displayValues[4] &&
+        displayValues[3] == displayValues[5] &&
+        displayValues[3] != '') {
+      showDashBoard(displayValues[3]);
+    }
+    if (displayValues[6] == displayValues[7] &&
+        displayValues[6] == displayValues[8] &&
+        displayValues[6] != '') {
+      showDashBoard(displayValues[6]);
+    }
+    if (displayValues[0] == displayValues[3] &&
+        displayValues[0] == displayValues[6] &&
+        displayValues[0] != '') {
+      showDashBoard(displayValues[0]);
+    }
+    if (displayValues[1] == displayValues[4] &&
+        displayValues[1] == displayValues[7] &&
+        displayValues[1] != '') {
+      showDashBoard(displayValues[1]);
+    }
+    if (displayValues[2] == displayValues[5] &&
+        displayValues[2] == displayValues[8] &&
+        displayValues[2] != '') {
+      showDashBoard(displayValues[2]);
+    }
+    if (displayValues[0] == displayValues[4] &&
+        displayValues[0] == displayValues[8] &&
+        displayValues[0] != '') {
+      showDashBoard(displayValues[0]);
+    }
+    if (displayValues[2] == displayValues[4] &&
+        displayValues[2] == displayValues[6] &&
+        displayValues[2] != '') {
+      showDashBoard(displayValues[2]);
+    }
+  }
+
+  void showDashBoard(String winner) {
+    String finalWinner;
+    if(winner == 'X'){
+      finalWinner = 'Robot';
+    }else{
+      finalWinner = 'You';
+    }
+    showDialog(
+      context: context,
+      builder: (context) => SizedBox(
+        height: 400,
+        child: AlertDialog(
+          elevation: 0,
+          title: Center(
+            child: Text(
+              'DashBoard',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.italic,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          backgroundColor: Colors.green[400],
+          content: SizedBox(
+            height: 100,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Winner!',style: TextStyle(color: Colors.white),),
+                Text(
+                  finalWinner,
+                  style: GoogleFonts.bungeeSpice(
+                    fontSize: 50,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => GameScreenRobot()),
+                );
+              },
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+              child: Text('Play Again', style: TextStyle(color: Colors.white)),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomePage()),
+                );
+              },
+              child: Text('Cancel', style: TextStyle(color: Colors.white)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: AlignmentGeometry.topCenter,
+            end: AlignmentGeometry.bottomCenter,
+            colors: [Colors.deepPurpleAccent, Colors.green, Colors.blue],
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 20,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    style: IconButton.styleFrom(
+                      backgroundColor: Colors.white10,
+                    ),
+                    icon: Icon(
+                      Icons.music_note,
+                      color: Colors.yellow,
+                      size: 30,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomePage()),
+                      );
+                    },
+                    style: IconButton.styleFrom(
+                      backgroundColor: Colors.white10,
+                    ),
+                    icon: Icon(
+                      Icons.home_filled,
+                      color: Colors.yellow,
+                      size: 30,
+                    ),
+                  ),
+                ],
+              ),
+              // =======================Player 1 ======================
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomPlayerContainer(
+                    avatarIcon: Icons.recycling,
+                    playerName: 'X',
+                    borderColor: moveOfX ? Colors.red : Colors.transparent,
+                  ),
+                  CustomTimerContainer(timerVal: moveOfX ? _counter : 10,),
+                ],
+              ),
+              // =======================Grid View ======================
+              Container(
+                height: 400,
+                decoration: BoxDecoration(
+                  color: Colors.teal,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: GridView.builder(
+                  itemCount: 9,
+                  shrinkWrap: true,
+                  padding: EdgeInsets.all(15),
+                  physics: NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    mainAxisExtent: 120,
+                    mainAxisSpacing: 5,
+                    crossAxisSpacing: 5,
+                  ),
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        _gestureTap(index);
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white38,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Center(
+                          child: Text(
+                            displayValues[index],
+                            style: GoogleFonts.bungeeSpice(fontSize: 90),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              // =======================Player 2 ======================
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomTimerContainer(timerVal: moveOfX ? 10 : _counter,),
+                  CustomPlayerContainer(
+                    avatarIcon: Icons.person,
+                    playerName: '0',
+                    borderColor: moveOfX ? Colors.transparent : Colors.red,
+                  ),
+                ],
+              ),
+              // =============Display turn================
+              Container(
+                height: 50,
+                width: 250,
+                decoration: BoxDecoration(
+                  color: Colors.white10,
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                child: Center(
+                  child: Text(
+                    '${moveOfX ? 'Robot\'s'.toString() : 'Your'.toString()} Turn Now',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ======================Custom Player Container===================
+class CustomPlayerContainer extends StatelessWidget {
+  final Color borderColor;
+  final String playerName;
+  final IconData avatarIcon;
+  const CustomPlayerContainer({
+    super.key,
+    required this.playerName,
+    required this.borderColor,
+    required this.avatarIcon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white10,
+        borderRadius: BorderRadius.circular(15),
+        border: Border.all(color: borderColor, width: 3),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: Row(
+          spacing: 5,
+          children: [
+            CircleAvatar(child: Icon(avatarIcon)),
+            Container(
+              height: 40,
+              width: 40,
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child: Center(
+                child: Text(
+                  playerName,
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ======================Custom Timer Container=======================
+class CustomTimerContainer extends StatefulWidget {
+  final int timerVal;
+  const CustomTimerContainer({super.key,required this.timerVal});
+
+  @override
+  State<CustomTimerContainer> createState() => _CustomTimerContainerState();
+}
+
+class _CustomTimerContainerState extends State<CustomTimerContainer> {
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 50,
+      width: 60,
+      decoration: BoxDecoration(
+        color: Colors.white10,
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Center(
+        child: Text(
+          '${widget.timerVal.toString()} S',
+          style: TextStyle(
+            fontSize: 20,
+            color: Colors.orange,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+}
