@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tic_tac_toe/views/home_page.dart';
 
 void main() async {
@@ -35,31 +34,20 @@ class SplashScreen extends StatelessWidget {
             alignment: Alignment.center,
             children: [
               Opacity(
-                opacity: 0.2,
+                opacity: 0.15,
                 child: Image.asset(
-                  'assets/images/tictactoesplash.jpg',
+                  'assets/images/tic-tac-toe.png',
                   fit: BoxFit.fill,
                   height: double.infinity,
                   width: double.infinity,
                 ),
               ),
-              RichText(
-                text: TextSpan(
-                  style: GoogleFonts.mogra(fontSize: 150),
-                  children: [
-                    TextSpan(
-                      text: 'TIC\n',
-                      style: TextStyle(fontFamily: 'BungeeSpice'),
-                    ),
-                    TextSpan(
-                      text: 'TAC\n',
-                      style: TextStyle(fontFamily: 'BungeeSpice'),
-                    ),
-                    TextSpan(
-                      text: 'TOE',
-                      style: TextStyle(fontFamily: 'BungeeSpice'),
-                    ),
-                  ],
+              Text(
+                'Tic\nTac\nToe',
+                style: TextStyle(
+                  fontSize: 120,
+                  fontFamily: 'Nosifer',
+                  color: Colors.deepOrange,
                 ),
               ),
             ],

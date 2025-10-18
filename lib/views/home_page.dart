@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tic_tac_toe/views/game_screen.dart';
 import 'package:tic_tac_toe/views/game_screen_robot.dart';
 import 'package:tic_tac_toe/views/settings_page.dart';
@@ -24,44 +23,15 @@ class HomePage extends StatelessWidget {
           spacing: 20,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            RichText(
-              text: TextSpan(
-                style: GoogleFonts.mogra(fontSize: 30),
-                children: [
-                  TextSpan(
-                    text: 'TIC',
-                    style: TextStyle(fontFamily: 'BungeeSpice'),
-                  ),
-                  TextSpan(
-                    text: '-TAC-',
-                    style: TextStyle(fontFamily: 'BungeeSpice'),
-                  ),
-                  TextSpan(
-                    text: 'TOE',
-                    style: TextStyle(fontFamily: 'BungeeSpice'),
-                  ),
-                ],
-              ),
+            Text(
+              'TIC-TAC-TOE',
+              style: TextStyle(fontFamily: 'BungeeSpice', fontSize: 40),
             ),
-            RichText(
-              text: TextSpan(
-                style: GoogleFonts.mogra(fontSize: 60),
-                children: [
-                  TextSpan(
-                    text: 'O',
-                    style: TextStyle(fontFamily: 'BungeeSpice'),
-                  ),
-                  TextSpan(
-                    text: '-X-',
-                    style: TextStyle(fontFamily: 'BungeeSpice'),
-                  ),
-                  TextSpan(
-                    text: 'O',
-                    style: TextStyle(fontFamily: 'BungeeSpice'),
-                  ),
-                ],
-              ),
+            Text(
+              'O-X-O',
+              style: TextStyle(fontFamily: 'BungeeSpice', fontSize: 60),
             ),
+
             SizedBox(height: 20),
             // Play with Robot
             CustomElevatedButton(

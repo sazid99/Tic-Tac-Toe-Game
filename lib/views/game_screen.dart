@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tic_tac_toe/views/home_page.dart';
 
 class GameScreen extends StatefulWidget {
@@ -177,7 +176,10 @@ class _GameScreenState extends State<GameScreen> {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 8.0,
+            vertical: 16.0,
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 20,

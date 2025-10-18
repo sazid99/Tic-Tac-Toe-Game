@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tic_tac_toe/views/home_page.dart';
 
 class GameScreenRobot extends StatefulWidget {
@@ -205,7 +204,7 @@ class _GameScreenRobotState extends State<GameScreenRobot> {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 20,
@@ -285,7 +284,10 @@ class _GameScreenRobotState extends State<GameScreenRobot> {
                         child: Center(
                           child: Text(
                             displayValues[index],
-                            style: TextStyle(fontSize: 90,fontFamily: 'BungeeSpice'),
+                            style: TextStyle(
+                              fontSize: 90,
+                              fontFamily: 'BungeeSpice',
+                            ),
                           ),
                         ),
                       ),
