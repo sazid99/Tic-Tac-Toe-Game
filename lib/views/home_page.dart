@@ -1,10 +1,37 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/views/game_screen.dart';
 import 'package:tic_tac_toe/views/game_screen_robot.dart';
 import 'package:tic_tac_toe/views/settings_page.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final AudioPlayer bgPlayer = AudioPlayer();
+  final String bgAudio = 'game_audio_1';
+
+  Future<void> playBackgroundMusic() async {
+    await bgPlayer.play(AssetSource('audio/$bgAudio.mp3'), volume: 1);
+    bgPlayer.setReleaseMode(ReleaseMode.loop);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    playBackgroundMusic();
+  }
+
+  @override
+  void dispose() {
+    bgPlayer.stop();
+    bgPlayer.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +68,7 @@ class HomePage extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => GameScreenRobot()),
                 );
               },
-              buttonName: 'Play with Robot [AI]',
+              buttonName: 'Play with Robot',
             ),
             // Play with Friends
             CustomElevatedButton(

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/views/home_page.dart';
 
@@ -15,6 +16,14 @@ class _GameScreenState extends State<GameScreen> {
   bool moveOfX = true;
   int _counter = 10;
   Timer? _timer;
+
+  final AudioPlayer bgPlayer = AudioPlayer();
+  final String bgAudio = 'game_audio_1';
+
+  Future<void> playBackgroundMusic() async {
+    await bgPlayer.play(AssetSource('audio/$bgAudio.mp3'), volume: 1);
+    bgPlayer.setReleaseMode(ReleaseMode.loop);
+  }
 
   void startTimer() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -46,6 +55,7 @@ class _GameScreenState extends State<GameScreen> {
     // TODO: implement initState
     super.initState();
     startTimer();
+    playBackgroundMusic();
   }
 
   @override
@@ -53,6 +63,8 @@ class _GameScreenState extends State<GameScreen> {
     // TODO: implement dispose
     super.dispose();
     _timer?.cancel();
+    bgPlayer.stop();
+    bgPlayer.dispose();
   }
 
   void checkWinner() {
